@@ -1,0 +1,28 @@
+// Dota Heroes File
+// NOTE: This is not for creating new heroes, this is for taking a currently existing hero as a template and overriding
+// the specified key-value combinations.  Use override_hero <hero_to_override> for this.
+"DOTAHeroes"
+{
+	"npc_sniper"
+	{
+		"override_hero"				"npc_dota_hero_viper"			// Hero to override
+		"VisionNighttimeRange"		"1800"										// Range of vision at night time.
+		"AutoAttacksByDefault"      "0"
+		"Model"                     "models/npc_minions/draft_siege_good.vmdl"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"AttackCapabilities"   "DOTA_UNIT_CAP_NO_ATTACK"
+		"MovementTurnRate"          "3"                       // 转身速度
+		"Abilitylayout" "5"
+		"Ability1" "pom_Elune_Arrow2"
+	  	"Ability2" "imba_boost_laser"
+		"Ability3" "move_speed"
+		"Ability4" "RapidCreature_Nocturnal_Night"
+	// 	"Ability5" "ability_passive"
+	//	"Ability6" "orc_6"
+	 //"Ability7" "king_heal"  TODO	
+	 
+	 "MovementSpeed" "100"
+	  "AttackDamageMin"           "0"                         // ×îÐ¡ÉËº¦
+    "AttackDamageMax"           "0"                         // ×î´óÉËº¦
+	}
+}

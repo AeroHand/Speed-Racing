@@ -1,0 +1,285 @@
+// Dota Heroes File
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+    "ability_passive"
+    {
+        "BaseClass"                                        "ability_datadriven"
+        "AbilityBehavior"                        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+         
+        "Modifiers"
+        {
+                "modifier_ability_passive"
+                {
+                        "IsHidden"                        "1"
+                        "Passive"                        "1"
+ 
+                        "OnCreated"
+                        {
+                                "AttachEffect"
+                                {
+                                        "EffectName"                "particles/econ/courier/courier_greevil_green/courier_greevil_green_ambient_3.vpcf"
+                                        "EffectAttachType"  "follow_origin"
+                                        "Target"                           "CASTER"
+                                }
+                        }
+                }
+        }
+    }
+    "RapidCreature_Nocturnal_Night"
+    {
+        "BaseClass"                 "ability_datadriven"
+        "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
+        "MaxLevel"                  "1" 
+        "AbilityTextureName"        "night_stalker_hunter_in_the_night"
+        "Modifiers"
+        {
+            "RapidCreature_Nocturnal_Night_Modifier"
+            {
+                "Passive"       "1"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%speed_bonus"
+
+                }   
+            }
+        }
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "speed_bonus"       "5"
+            }
+
+        }
+    }
+
+
+    "move_speed"
+    {
+        "BaseClass"                     "ability_datadriven"
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastPoint"              "0.0 0.0 0.0 0.0"
+  
+        // Time     
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "1"
+  
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "1"
+  
+        "OnSpellStart"
+        {
+            "ApplyModifier"  //给予施法者BUFF
+            {
+                "Target"            "CASTER"
+                "ModifierName"      "modifier_move_speed"
+            }
+  
+            "ApplyModifier"  //给予施法者血魔的modifier
+            {
+                "Target"            "CASTER"
+                "ModifierName"      "modifier_bloodseeker_thirst_speed"
+                "Duration"          "%duration"
+            }
+        }
+  
+        "Modifiers"
+        {
+            "modifier_move_speed"
+            {
+                "Duration"          "%duration"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"        "%move_speed"  //移动速度
+
+                }
+            }
+        }
+  
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"      "FIELD_INTEGER"
+                "move_speed"    "1"
+            }
+            "02"
+            {
+                "var_type"      "FIELD_INTEGER"
+                "duration"      "3600"
+            }
+
+        }
+    }
+ "majia"  //马甲的基本技能
+  {
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+    "Modifiers"
+    {
+      "modifier_majia"
+      {
+        "Passive"   "1"
+        "IsHidden"    "1"
+
+        "States"
+        {
+          "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED" //隐藏血条
+          "MODIFIER_STATE_MAGIC_IMMUNE" "MODIFIER_STATE_VALUE_ENABLED" //魔法免疫
+          "MODIFIER_STATE_ATTACK_IMMUNE"  "MODIFIER_STATE_VALUE_ENABLED" //攻击免疫
+          "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED" //不可选择
+          "MODIFIER_STATE_NO_UNIT_COLLISION"  "MODIFIER_STATE_VALUE_ENABLED" //无碰撞
+        }
+      }
+    }
+  }
+	"pom_Elune_Arrow"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		//"AbilityTextureName"	"lina_dragon_slave"
+     
+		"AbilityCastPoint"      "0"
+		//"AbilityCastAnimation"	"ACT_DOTA_CAST_ABILITY_1"
+
+		"AbilityCooldown"       "0"
+
+		"precache" //缓存特效
+        {
+            "particle"       "particles/gyro_base_attack.vpcf"
+        }
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/projectiletest.lua"
+				"Function"			"shemejiba"
+				"DamageRad"			"2000"
+				"DamageRadius"		"2000"
+				"Target"			"POINT"
+			}
+		}
+
+		//在RunScript中通过Lua施放了线性投射物，这里可以响应命中目标
+		"OnProjectileHitUnit"  
+        {
+        	"DeleteOnHit"        "1"  //命中之后不删除投射物
+        	"Damage"//这里改成Script
+        	{
+        		"Damage"		"999999"
+        		"Target"		"TARGET"
+        		"Type"			"DAMAGE_TYPE_PURE"
+        	}
+        }
+        "AbilitySpecial"
+		{
+			"01"  //距离
+			{
+				"var_type"		"FIELD_INTEGER"
+				"distance"		"1500"
+			}
+		}
+
+	}
+
+    
+"pom_Elune_Arrow2"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		//"AbilityTextureName"	"lina_dragon_slave"
+
+		"AbilityCastPoint"      "0"
+		//"AbilityCastAnimation"	"ACT_DOTA_CAST_ABILITY_1"
+
+		"AbilityCooldown"       "0"
+
+		"precache" //缓存特效
+        {
+            "particle"       "particles/gyro_base_attack.vpcf"
+        }
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/projectiletest.lua"
+				"Function"			"shemejiba"
+				"DamageRad"			"2000"
+				"DamageRadius"		"2000"
+				"Target"			"POINT"
+			}
+		}
+
+		//在RunScript中通过Lua施放了线性投射物，这里可以响应命中目标
+		"OnProjectileHitUnit"  
+        {
+        	"DeleteOnHit"        "1"  //命中之后不删除投射物
+        	"Damage"//这里改成Script
+        	{
+        		"Damage"		"999999"
+        		"Target"		"TARGET"
+        		"Type"			"DAMAGE_TYPE_PURE"
+        	}
+        }
+        "AbilitySpecial"
+		{
+			"01"  //距离
+			{
+				"var_type"		"FIELD_INTEGER"
+				"distance"		"1500"
+			}
+		}
+
+	}
+        "imba_boost_laser"
+    {
+        "BaseClass"             "ability_datadriven"
+        "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+        "AbilityTextureName"    "tinker_laser"
+
+        "AbilityCastPoint"      "0"
+        //"AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_1"
+
+        "AbilityCooldown"       "0"
+        "precache" //缓存特效
+        {
+            "particle"       "particles/chen_cast_4.vpcf"
+        }
+        "OnSpellStart"
+        {
+            "RunScript"
+            {
+                "ScriptFile"        "scripts/vscripts/projectiletest.lua"
+                "Function"          "laser_boost"
+                "DamageRadius"      "20000"
+                "DamageRad"         "20000"
+            }
+        }
+        "OnProjectileHitUnit"  
+        {
+            "DeleteOnHit"        "0"  //命中之后不删除投射物
+            "Damage"//这里改成Script
+            {
+                "Damage"        "999999"
+                "Target"        "TARGET"
+                "Type"          "DAMAGE_TYPE_PURE"
+            }
+        }
+    }
+
+}

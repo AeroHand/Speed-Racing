@@ -1,0 +1,15 @@
+"CustomEvents"
+{
+   "p_update"
+   {
+    "pp1"            "float"
+    "pp2"            "float"
+    "pp3"            "float"
+  }
+  "console_command"
+    {
+        "pid"              "short"
+        "command"          "string"
+    }
+}
+
