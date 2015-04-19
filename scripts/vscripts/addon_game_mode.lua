@@ -22,7 +22,7 @@ function PrecacheEveryThingFromKV( context )
     }
      
 
-    print("loading shiping"})
+    print("loading shiping")
   local t=#zr;
   for i=1,t do
 
@@ -30,7 +30,7 @@ function PrecacheEveryThingFromKV( context )
 
     end
 
-    print("done loading shiping"})
+    print("done loading shiping")
 
 
 end
@@ -39,15 +39,15 @@ function PrecacheEverythingFromTable( context, kvtable)
     if type(value) == "table" then
       PrecacheEverythingFromTable( context, value )
     else
-      if string.find(value, "vpcf"}) then
+      if string.find(value, "vpcf") then
         PrecacheResource( "particle",  value, context)
         print("PRECACHE PARTICLE RESOURCE", value)
       end
-      if string.find(value, "vmdl"}) then  
+      if string.find(value, "vmdl") then  
         PrecacheResource( "model",  value, context)
         print("PRECACHE MODEL RESOURCE", value)
       end
-      if string.find(value, "vsndevts"}) then
+      if string.find(value, "vsndevts") then
         PrecacheResource( "soundfile",  value, context)
         print("PRECACHE SOUND RESOURCE", value)
       end
@@ -57,11 +57,11 @@ function PrecacheEverythingFromTable( context, kvtable)
    
 end
 function Precache( context )
-  print("BEGIN TO PRECACHE RESOURCE"})
+  print("BEGIN TO PRECACHE RESOURCE")
   local time = GameRules:GetGameTime()
   PrecacheEveryThingFromKV( context )
   time = time - GameRules:GetGameTime()
-  print("DONE PRECACHEING IN:"..tostring(time).."Seconds"})
+  print("DONE PRECACHEING IN:"..tostring(time).."Seconds")
 end
 
 -- Create the game mode when we activate
@@ -75,8 +75,8 @@ function jajajaGameMode:InitGameMode()
 
     GameRules:SetPreGameTime(10)
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
-  ListenToGameEvent("npc_spawned", Dynamic_Wrap(jajajaGameMode, "OnNPCSpawned"}), self)
-  ListenToGameEvent("entity_killed", Dynamic_Wrap(jajajaGameMode, "OnEntityKilled"}), self)
+  ListenToGameEvent("npc_spawned", Dynamic_Wrap(jajajaGameMode, "OnNPCSpawned"), self)
+  ListenToGameEvent("entity_killed", Dynamic_Wrap(jajajaGameMode, "OnEntityKilled"), self)
     --注册英雄行走方向命令
 
     Convars:RegisterCommand( "UpWalking", function(name)
@@ -179,34 +179,34 @@ end
 -- Evaluate the state of the game
 function jajajaGameMode:OnThink()
 	if hulage==0 then
-        hulage=1
-       FireGameEvent("console_command", {pid=-1, command="dota_ability_debug 1"})
-       FireGameEvent("console_command", {pid=-1, command="dota_camera_pitch_max 25"})
-       FireGameEvent("console_command", {pid=-1, command="dota_camera_lock_lerp 0"})
-       FireGameEvent("console_command", {pid=-1, command="dota_camera_lock"})
-      --FireGameEvent("console_command", {pid=-1, command="dota_camera_pitch_max 10"});
-       FireGameEvent("console_command", {pid=-1, command="r_farz 6000"});
-       FireGameEvent("console_command", {pid=-1, command="unbindall"});
-       FireGameEvent("console_command", {pid=-1, command="alias \"+move_left\" \"LeftWalking\""});
-       FireGameEvent("console_command", {pid=-1, command="alias \"-move_left\" \"LeftWalkingDone\""});
-       FireGameEvent("console_command", {pid=-1, command="alias \"+move_right\" \"RightWalking\""});
-       FireGameEvent("console_command", {pid=-1, command="alias \"-move_right\" \"RightWalkingDone\""});
-       FireGameEvent("console_command", {pid=-1, command="bind leftarrow +move_left"});
-       FireGameEvent("console_command", {pid=-1, command="bind rightarrow +move_right"});
+       hulage=1
+       FireGameEvent("console_command", {pid=0, command="dota_ability_debug 1"})
+       FireGameEvent("console_command", {pid=0, command="dota_camera_pitch_max 25"})
+       FireGameEvent("console_command", {pid=0, command="dota_camera_lock_lerp 0"})
+       FireGameEvent("console_command", {pid=0, command="dota_camera_lock"})
+      --FireGameEvent("console_command", {pid=0, command="dota_camera_pitch_max 10"});
+       FireGameEvent("console_command", {pid=0, command="r_farz 6000"});
+       FireGameEvent("console_command", {pid=0, command="unbindall"});
+       FireGameEvent("console_command", {pid=0, command="alias \"+move_left\" \"LeftWalking\""});
+       FireGameEvent("console_command", {pid=0, command="alias \"-move_left\" \"LeftWalkingDone\""});
+       FireGameEvent("console_command", {pid=0, command="alias \"+move_right\" \"RightWalking\""});
+       FireGameEvent("console_command", {pid=0, command="alias \"-move_right\" \"RightWalkingDone\""});
+       FireGameEvent("console_command", {pid=0, command="bind leftarrow +move_left"});
+       FireGameEvent("console_command", {pid=0, command="bind rightarrow +move_right"});
 
-       FireGameEvent("console_command", {pid=-1, command="alias \"+move_up\" \"UpWalking\""});
-       FireGameEvent("console_command", {pid=-1, command="alias \"-move_up\" \"UpWalkingDone\""});
-       FireGameEvent("console_command", {pid=-1, command="alias \"+move_down\" \"DownWalking\""});
-       FireGameEvent("console_command", {pid=-1, command="alias \"-move_down\" \"DownWalkingDone\""});
-       FireGameEvent("console_command", {pid=-1, command="bind uparrow +move_up"});
-       FireGameEvent("console_command", {pid=-1, command="bind downarrow +move_down"});
+       FireGameEvent("console_command", {pid=0, command="alias \"+move_up\" \"UpWalking\""});
+       FireGameEvent("console_command", {pid=0, command="alias \"-move_up\" \"UpWalkingDone\""});
+       FireGameEvent("console_command", {pid=0, command="alias \"+move_down\" \"DownWalking\""});
+       FireGameEvent("console_command", {pid=0, command="alias \"-move_down\" \"DownWalkingDone\""});
+       FireGameEvent("console_command", {pid=0, command="bind uparrow +move_up"});
+       FireGameEvent("console_command", {pid=0, command="bind downarrow +move_down"});
        
-       FireGameEvent("console_command", {pid=-1, command="alias \"+gasoline\" \"GasolineAcc\""});
-       FireGameEvent("console_command", {pid=-1, command="alias \"-gasoline\" \"GasolineAccDone\""});    
-       FireGameEvent("console_command", {pid=-1, command="bind space +gasoline"});
+       FireGameEvent("console_command", {pid=0, command="alias \"+gasoline\" \"GasolineAcc\""});
+       FireGameEvent("console_command", {pid=0, command="alias \"-gasoline\" \"GasolineAccDone\""});    
+       FireGameEvent("console_command", {pid=0, command="bind space +gasoline"});
 
-     --    FireGameEvent("console_command", {pid=-1, command="dota_sf_hud_inventory 0"})
-     --    FireGameEvent("console_command", {pid=-1, command="dota_render_crop_height 0"})
+     --    FireGameEvent("console_command", {pid=0, command="dota_sf_hud_inventory 0"})
+     --    FireGameEvent("console_command", {pid=0, command="dota_render_crop_height 0"})
         ps_init()
        -- gm()
       end
@@ -240,12 +240,12 @@ end
 
 --行走开始
 function jajajaGameMode:WalkingUp(player)
-  print("get walking up!"})
+  print("get walking up!")
   ps[player:GetPlayerID()][7]=1
 end
 
 function jajajaGameMode:WalkingDown(player)
-  print("get walking down!"})
+  print("get walking down!")
  --[[ local hero=player:GetAssignedHero()
   local vec=hero:GetAbsOrigin()
   local newvec
@@ -258,7 +258,7 @@ function jajajaGameMode:WalkingDown(player)
 end
 
 function jajajaGameMode:WalkingLeft(player)
-  print("get walking left!"})
+  print("get walking left!")
   --[[
   local hero=player:GetAssignedHero()
   local vec=hero:GetAbsOrigin()
@@ -274,7 +274,7 @@ function jajajaGameMode:WalkingLeft(player)
 end
 
 function jajajaGameMode:WalkingRight(player)
-  print("get walking right!"})
+  print("get walking right!")
   --[[
   local hero=player:GetAssignedHero()
   local vec=hero:GetAbsOrigin()
@@ -367,7 +367,7 @@ function jajajaGameMode:OnNPCSpawned( keys )
    local unit =  EntIndexToHScript(keys.entindex)
    
    if unit:IsHero() then                      --Èç¹ûÊÇÓ¢ÐÛ
-      FireGameEvent("console_command", {pid=-1, command="dota_create_item item_force_staff"})
+      FireGameEvent("console_command", {pid=0, command="dota_create_item item_force_staff"})
       unit:SetAbilityPoints(0)                --È¡Ïû¼¼ÄÜµã
  
       local j=0 
@@ -390,8 +390,8 @@ function jajajaGameMode:OnNPCSpawned( keys )
       ps[pid][5]=unit:GetForwardVector()
       view(ps[pid][5],pid)
 
-      unit:RemoveModifierByName("modifier_ability_passive"})
-      GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("moguidebufa"}), 
+      unit:RemoveModifierByName("modifier_ability_passive")
+      GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("moguidebufa"), 
         function()
           --unit:英雄
           --pid:playerID
@@ -407,7 +407,7 @@ function jajajaGameMode:OnNPCSpawned( keys )
             end  
           else
             --如果玩家使用了加速
-            print("gasoline accelerate start"})
+            print("gasoline accelerate start")
             --如果现在不是加速状态
             if ps[pid][10]>20  then
               --如果还有油
@@ -465,11 +465,11 @@ function jajajaGameMode:OnNPCSpawned( keys )
             if ps[pid][1][layer]==1 then  --往左走
               xincx=Vector(chaoxiang.x*math.cos(math.pi/180*4)-chaoxiang.y*math.sin(math.pi/180*4),chaoxiang.x*math.sin(math.pi/90)+chaoxiang.y*math.cos(math.pi/90),chaoxiang.z)
               --pvalue=pvalue+4
-              --FireGameEvent("console_command", {pid=-1, command="dota_camera_yaw "..tostring(pvalue-90))
+              --FireGameEvent("console_command", {pid=0, command="dota_camera_yaw "..tostring(pvalue-90))
              else
               --pvalue=pvalue-4
               xincx=Vector(chaoxiang.x*math.cos(math.pi/180*4)+chaoxiang.y*math.sin(math.pi/180*4),-chaoxiang.x*math.sin(math.pi/90)+chaoxiang.y*math.cos(math.pi/90),chaoxiang.z)
-              --FireGameEvent("console_command", {pid=-1, command="dota_camera_yaw "..tostring(pvalue-90))
+              --FireGameEvent("console_command", {pid=0, command="dota_camera_yaw "..tostring(pvalue-90))
 
 
             end
@@ -489,7 +489,7 @@ function jajajaGameMode:OnNPCSpawned( keys )
           if ps[pid][10]>100 then
             ps[pid][10]=100
           end  
-          print("current oil"})
+          print("current oil")
           print(ps[pid][10])
           sendinfotoui()
 
@@ -509,7 +509,7 @@ function view(a,pid)
    pvalue=pvalue+180
  end
 
-  FireGameEvent("console_command", {pid=pid, command="dota_camera_yaw "..tostring(pvalue))  
+  FireGameEvent("console_command", {pid=pid, command="dota_camera_yaw "..tostring(pvalue)})  
 end
 
 function  ps_init()
@@ -520,7 +520,7 @@ function  ps_init()
   for i=0,9 do
     --if PlayerResource:IsValidPlayer(i) then
 
-        print("playerconnected:"})
+        print("playerconnected:")
         print(i)
 
         ps[i]={}     --0为上下 1为左右操作队列 2为攻击上下 3为攻击左右 4为速度 5为初始朝向 6为左右操作队列指针
@@ -546,12 +546,12 @@ function  ps_init()
       end]]
     end
 
-    local temp=Entities:FindByName(nil,"zibao"}) --所有单位假死沉睡的最终之地 神之居所瓦尔哈拉！
+    local temp=Entities:FindByName(nil,"zibao") --所有单位假死沉睡的最终之地 神之居所瓦尔哈拉！
     zibao=temp:GetAbsOrigin()
 end
 
 function jajajaGameMode:OnEntityKilled( keys )
-        print("OnEntityKilled"})
+        print("OnEntityKilled")
         DeepPrintTable(keys)    --详细打印传递进来的表
         local burden=EntIndexToHScript(keys.entindex_killed)
         burden:SetAbsOrigin(zibao)
